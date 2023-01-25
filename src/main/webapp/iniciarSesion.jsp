@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <title>Iniciar Sesion</title>
 <link rel="stylesheet" href="css/estilosIniciarSesion.css">
 <link rel="stylesheet"
@@ -39,36 +40,42 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><a class="nav-link" href="miPerfil.jsp"><span
+					class="colorVinoClaro">Mi Perfil</span></a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="iniciarSesion.jsp"><span class="colorVinoClaro">Iniciar Sesion</span></a></li>
-				<li class="nav-item"><a class="nav-link"
-				href="miPerfil.jsp"><span class="colorVinoClaro">Mi Perfil</span></a></li>
+				href="iniciarSesion.jsp"><span class="colorVinoClaro">Iniciar
+						Sesion</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="crearCuenta.jsp"><span
+					class="colorVinoClaro">Crear Cuenta</span></a></li>
 		</ul>
 
 		<form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" style="background-color: #d9d9d9" type="search"
-				placeholder="Marquez de Cáceres" aria-label="Search">
+			<input class="form-control mr-sm-2" style="background-color: #d9d9d9"
+				type="search" placeholder="Marquez de Cáceres" aria-label="Search">
 			<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Buscar</button>
 		</form>
 
 	</div>
 	</nav>
-	
+	<%
+	String redirect = "miPerfil.jsp";
+	if (session.getAttribute("iniciado") != ("1")) {
+	%>
 	<h1>Iniciar Sesión</h1>
-	<form action="iniciadoSiNo.jsp" method="post" name="iniciosesion" />
+	<form action="session/abrirsesion.jsp" method="post" name="iniciosesion" />
 	<table style="text-align: left; border: none;">
 		<tr>
 			<td><input type="hidden" name="varoculta" value="secreto" />
 				Usuario:</td>
 			<td><input type="text" name="usuario"
-				onkeypress="return compruebaalfan(this,event);" 
-				value="" class="inputgris" /></td>
+				onkeypress="return compruebaalfan(this,event);" value=""
+				class="inputgris" /></td>
 		</tr>
 		<tr>
 			<td>Contraseña:</td>
-			<td><input type="password" name="passwd"
-				onkeypress="return compruebaalfan(this,event);" 
-				value="" class="inputgris" /></td>
+			<td><input type="password" name="pass"
+				onkeypress="return compruebaalfan(this,event);" value=""
+				class="inputgris" /></td>
 		</tr>
 		<tr>
 			<td></td>
@@ -77,7 +84,18 @@
 		</tr>
 	</table>
 	</form>
-	<a href="usercheck.jsp">Comprobar sesion</a>
+	
+	<%
+	} else {
+	%>
+	<h1>Ya tienes una sesion activa</h1>
+	<a href="index.jsp">Inicio</a>
+	<br>
+	<a href="miPerfil.jsp">Mi perfil</a>
+	<%
+	}
+	%>
+
 
 
 

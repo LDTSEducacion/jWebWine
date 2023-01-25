@@ -38,40 +38,54 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><a class="nav-link" href="miPerfil.jsp"><span
+					class="colorVinoClaro">Mi Perfil</span></a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="iniciarSesion.jsp"><span class="colorVinoClaro">Iniciar Sesion</span></a></li>
-				<li class="nav-item"><a class="nav-link"
-				href="miPerfil.jsp"><span class="colorVinoClaro">Mi Perfil</span></a></li>
+				href="iniciarSesion.jsp"><span class="colorVinoClaro">Iniciar
+						Sesion</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="crearCuenta.jsp"><span
+					class="colorVinoClaro">Crear Cuenta</span></a></li>
 		</ul>
 
-		<form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" style="background-color: #d9d9d9" type="search"
+		<form class="form-inline my-2 my-lg-0" action="index.jsp"
+			method="post" name="buscar">
+			<input name="resultadobusqueda" class="form-control mr-sm-2"
+				style="background-color: #d9d9d9" type="search"
 				placeholder="Marquez de Cáceres" aria-label="Search">
 			<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Buscar</button>
 		</form>
 
 	</div>
 	</nav>
-
-
+	<%
+	String resultadobusqueda = null;
+	resultadobusqueda = request.getParameter("resultadobusqueda");
+	String[][] tablares;
+	beanDB basededatos = new beanDB();
+	if (resultadobusqueda == null) {
+		String query = "select imagen,nombre,tipo,origen,descripcion from botellas";
+		tablares = basededatos.resConsultaSelectA3(query);
+	} else {
+		String query = "select imagen,nombre,tipo,origen,descripcion from botellas where nombre=lower('" + resultadobusqueda
+		+ "')";
+		tablares = basededatos.resConsultaSelectA3(query);
+	}
+	if ((resultadobusqueda == null && tablares != null) || (resultadobusqueda != null && tablares != null)) {
+	%>
 	<div id="titulo">
 		<h2>Informacion sobre cualquier tipo de botella</h2>
 	</div>
 	<div id="principal" class="container-fluid">
 		<div class="row">
 			<div class="col-12 ">
-				<%
-				String query = "select imagen,nombre,tipo,origen,descripcion from botellas";
-				beanDB basededatos = new beanDB();
-				String[][] tablares = basededatos.resConsultaSelectA3(query);
-				%>
+
 
 				<table>
 					<%
 					for (int i = 0; i < tablares.length; i++) {
 					%><tr>
 						<%
-						for (int j = 0; j < tablares[i].length-3; j++) {
+						for (int j = 0; j < tablares[i].length - 3; j++) {
 						%>
 						<td>
 							<%
@@ -79,12 +93,14 @@
 							%><img alt="<%=tablares[i][j]%>" src="<%=tablares[i][j]%>">
 							<%
 							} else if (j == 1) {
-							%><h3><b>Nombre: </b><%=tablares[i][j]%></h3>
-							<p><b>Tipo: </b><%=tablares[i][j + 1]%>
-							<br>
-							<b>Origen: </b><%=tablares[i][j + 2]%></p> 
-							<p><b>Descripcion: </b><br><%=tablares[i][j+3]%></p>
-							<a href="informacionBotellas.jsp"> Ver Informacion</a>
+							%><h3>
+								<b>Nombre: </b><%=tablares[i][j]%></h3>
+							<p>
+								<b>Tipo: </b><%=tablares[i][j + 1]%>
+								<br> <b>Origen: </b><%=tablares[i][j + 2]%></p>
+							<p>
+								<b>Descripcion: </b><br><%=tablares[i][j + 3]%></p> <a
+							href="informacionBotellas.jsp"> Ver Informacion</a>
 						</td>
 						<%
 						}
@@ -94,8 +110,16 @@
 					<tr />
 					<%}%>
 				</table>
+				<%
+				} else {
+				%>
+				<h1>No hay resultados de busqueda</h1>
+				<a href="index.jsp">Volver</a>
+				<%
+				}
+				%>
 			</div>
-			
+
 
 
 		</div>

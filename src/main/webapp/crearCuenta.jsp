@@ -4,13 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%
-
-String query="select fechaCreacion from usuarios where idUsuario = "+session.getAttribute("idusuario");
-beanDB basededatos = new beanDB();
-String [][] fechaCreacion = basededatos.resConsultaSelectA3(query);%>
-
-<title>Mi Perfil</title>
+<title>Crear Cuenta</title>
 <link rel="stylesheet" href="css/estilosIniciarSesion.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
@@ -60,20 +54,42 @@ String [][] fechaCreacion = basededatos.resConsultaSelectA3(query);%>
 
 	</div>
 	</nav>
-	<% if (session.getAttribute("iniciado")==("1")){%>
-	<h1>Este es tu perfil:</h1>
-	<ul>
-	<li><p><b>Usuario:</b> <%=session.getAttribute("usuario") %></p></li>
-	<li><p><b>Cuenta creada el: </b><%=fechaCreacion[0][0] %></p></li>
-	</ul>
+	<% if (session.getAttribute("iniciado")!=("1")){%>
+	<h1>Crear Cuenta</h1>
+	<form action="creadoSiNo.jsp" method="post" name="crearsesion" />
+	<table style="text-align: left; border: none;">
+		<tr>
+			<td><input type="hidden" name="varoculta" value="secreto" />
+				Usuario:</td>
+			<td><input type="text" name="usuario" maxlength="15"
+				onkeypress="return compruebaalfan(this,event);" value=""
+				class="inputgris" /></td>
+		</tr>
+		<tr>
+			<td>Contraseña:</td>
+			<td><input type="password" name="pass" maxlength="10"
+				onkeypress="return compruebaalfan(this,event);" value=""
+				class="inputgris" /></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td style="text-align: right;"><input type="button" name="send"
+				value="Enviar" onclick="compruebayenvia();" /></td>
+		</tr>
+	</table>
+	</form><%} else { %>
+	<h1>Ya tienes una cuenta creada</h1>
+	<a href="miPerfil.jsp">Ver Perfil</a>
 	<br>
-	<a href="session/cerrarsesion.jsp">Cerrar Sesion</a>
-	<%} else{%>
-	<h1>No has iniciado sesion</h1>
-	<a href="crearCuenta.jsp">Crear Cuenta</a>
-	<br>
-	<a href="iniciarSesion.jsp">Iniciar Sesion</a>
+	<a href="index.jsp">Inicio</a>
 	<%} %>
 	
+	
+	
+	
+	
+	
+	
+
 </body>
 </html>
