@@ -58,11 +58,11 @@
 	</div>
 	</nav>
 	<%
-	String redirect = "miPerfil.jsp";
+	
 	if (session.getAttribute("iniciado") != ("1")) {
 	%>
 	<h1>Iniciar Sesión</h1>
-	<form action="session/abrirsesion.jsp" method="post" name="iniciosesion" />
+	<form action="./loginuser" method="post" name="iniciosesion" />
 	<table style="text-align: left; border: none;">
 		<tr>
 			<td><input type="hidden" name="varoculta" value="secreto" />

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="mipk.beanDB"%>
+<%@page import="mipk.beanDB" import="winedb.newuser"
+
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,6 +25,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
+<script type="text/javascript" src="scripts/scripts.js"></script>
 </head>
 
 <body>
@@ -56,7 +59,7 @@
 	</nav>
 	<% if (session.getAttribute("iniciado")!=("1")){%>
 	<h1>Crear Cuenta</h1>
-	<form action="creadoSiNo.jsp" method="post" name="crearsesion" />
+	<form action="./newuser" method="post" name="crearsesion" />
 	<table style="text-align: left; border: none;">
 		<tr>
 			<td><input type="hidden" name="varoculta" value="secreto" />
@@ -67,14 +70,14 @@
 		</tr>
 		<tr>
 			<td>Contraseña:</td>
-			<td><input type="password" name="pass" maxlength="10"
+			<td><input type="password" name="pass" maxlength="20"
 				onkeypress="return compruebaalfan(this,event);" value=""
 				class="inputgris" /></td>
 		</tr>
 		<tr>
 			<td></td>
 			<td style="text-align: right;"><input type="button" name="send"
-				value="Enviar" onclick="compruebayenvia();" /></td>
+				value="Enviar" onclick="compruebayenviacreardb();" /></td>
 		</tr>
 	</table>
 	</form><%} else { %>

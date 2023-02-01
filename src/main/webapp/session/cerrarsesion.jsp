@@ -58,6 +58,6 @@ session.invalidate();
 	</div>
 	</nav>
 Sesion Cerrada.<br/>
-<a href="../miPerfil.jsp">Volver</a>
+<a href="../index.jsp">Inicio</a>
 </body>
 </html>

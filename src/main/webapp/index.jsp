@@ -45,6 +45,10 @@
 						Sesion</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="crearCuenta.jsp"><span
 					class="colorVinoClaro">Crear Cuenta</span></a></li>
+			<% if (session.getAttribute("tipocuenta").equals("1")){%>
+			<li class="nav-item"><a class="nav-link" href="admin.jsp"><span
+					class="colorVinoClaro">Administrar</span></a></li>
+			<%} %>
 		</ul>
 
 		<form class="form-inline my-2 my-lg-0" action="index.jsp"
