@@ -16,7 +16,9 @@ CREATE TABLE usuarios(
     idUsuario int PRIMARY KEY AUTO_INCREMENT,
     usuario VARCHAR(20) NOT NULL,
     passwd VARBINARY(8000),
-    fechaCreacion DATE
+    fechaCreacion DATE,
+    ultimoacceso datetime,
+    tipocuenta smallint
 )ENGINE=InnoDB;
 
 CREATE TABLE botellas(
@@ -25,7 +27,8 @@ CREATE TABLE botellas(
     origen VARCHAR(50),
     envejecimiento VARCHAR(20),
     descripcion text,
-    imagen MEDIUMBLOB
+    imagen MEDIUMBLOB,
+    nombre varchar(100) NOT NULL
 )ENGINE=InnoDB;
 
 CREATE TABLE comentarios(
@@ -36,11 +39,6 @@ CREATE TABLE comentarios(
     CONSTRAINT comentarios_botellas_fk FOREIGN KEY (botellaId) REFERENCES botellas(idBotella),
     CONSTRAINT comentarios_usuarios_fk FOREIGN KEY (usuarioId) REFERENCES usuarios(idUsuario)
 )ENGINE=InnoDB;
-
-ALTER TABLE botellas
-    ADD nombre VARCHAR(100) NOT NULL;
     
-ALTER TABLE usuarios
-    add ultimoacceso DATETIME;
     
 /-----------------------------------/
