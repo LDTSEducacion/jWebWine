@@ -1,11 +1,11 @@
 Proyecto sobre informacion de botellas de vino, cavas...
 Base de datos:
 
-usuarios:idUsuario(int), usuario(VARCHAR), contraseña(VARBINARY), fechaCreacion(DATE)
+usuarios:idUsuario(int), usuario(VARCHAR), contraseña(VARBINARY), fechaCreacion(DATE), ultimoacceso(datetime), tipocuenta(smallint).
 
 Comentario:idComentario(int), mensaje(text), botellaId(int), usuarioId(int)
 
-Botella:idBotella(int), tipo(VARCHAR), origen(VARCHAR), envejecimiento(VARCHAR), descripcion(TEXT), imagen(MEDIUMBLOB)
+Botella:idBotella(int), tipo(VARCHAR), origen(VARCHAR), envejecimiento(VARCHAR), descripcion(TEXT), imagen(MEDIUMBLOB), nombre(VARCHAR)
 
 /-----------------------------------/
 
