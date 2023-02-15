@@ -1,9 +1,5 @@
 package winedb;
 
-import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect;
-import java.sql.SQLException;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,18 +8,21 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import mipk.beanDB;
 
+import java.io.IOException;
+import java.sql.SQLException;
 
 /**
- * Servlet implementation class newwine
+ * Servlet implementation class delwine
  */
-@WebServlet("/newwine")
-public class newwine extends HttpServlet {
+@WebServlet("/delwine")
+public class delwine extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public newwine() {
+    public delwine() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -39,18 +38,18 @@ public class newwine extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 		HttpSession session = request.getSession();
 		String admin = ""+session.getAttribute("tipocuenta");
 		String url ="admin.jsp";
-		String resultado ="No se a podido añadir la botella";
+		String resultado ="No se a podido eliminar la botella";
 		if (admin.equals("1")){
 			//Declaro cosas
 			beanDB basedatos = new beanDB();
 			String[][] resultadoquery = null;
 			//Capturo datos
 			String nombrebotella=request.getParameter("nombrebotella");
+			
 			String tipobotella=request.getParameter("tipobotella");
 			String origenbotella=request.getParameter("origenbotella");
 			String edadbotella=request.getParameter("edadbotella");
@@ -74,20 +73,19 @@ public class newwine extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			if(resultadoquery!=null) {
-				resultado="La botella ya existe";
+			if(resultadoquery==null) {
+				resultado="La botella no existe";
 			}
 			else {
-				basedatos.insert("INSERT INTO botellas (nombre,tipo,origen,envejecimiento,descripcion,imagen) VALUES ('"+nombrebotella+"','"+tipobotella+"','"+origenbotella+"','"+edadbotella+"','"+descripcionbotella+"','img/"+urlbotella+"')");
-				resultado="Correcto!!!";
+				basedatos.delete("DELETE FROM botellas where idBotella ="+resultadoquery[0][0]);
+				resultado="Eliminado!!!";
 			}
 			
 			}
 			response.sendRedirect(url+"?msg="+resultado);
-			
-			
-			
 		}
+		
+		
 		
 		
 	}

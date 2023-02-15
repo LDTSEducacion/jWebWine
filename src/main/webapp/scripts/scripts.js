@@ -5,6 +5,12 @@ function compruebayenvia() {
 		alert ('¡Tiene que rellenar todos los campos!');
 	else datos.submit();
 }
+function compruebayenviaC() {
+	datos=document.nuevocomentario;
+	if (datos.comentario.value == '')
+		alert ('¡Tiene que rellenar todos los campos!');
+	else datos.submit();
+}
 function compruebayenviacreardb() {
 	datos=document.crearsesion;
 	if (datos.usuario.value == '' ||

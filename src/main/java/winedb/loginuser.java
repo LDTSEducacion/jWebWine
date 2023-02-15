@@ -44,7 +44,7 @@ public class loginuser extends HttpServlet {
 		String url ="iniciarSesion.jsp";
 		
 		if (session.getAttribute("iniciado")!=("1")){
-		String redirect = "../iniciarSesion.jsp";
+		
 		String usuario=request.getParameter("usuario");
 		String pass=request.getParameter("pass");
 		if (usuario == null) usuario="";

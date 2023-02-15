@@ -44,12 +44,18 @@ String [][] fechaCreacion = basededatos.resConsultaSelectA3(query);%>
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><a class="nav-link" href="miPerfil.jsp"><span
+					class="colorVinoClaro">Mi Perfil</span></a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="miPerfil.jsp"><span class="colorVinoClaro">Mi Perfil</span></a></li>
-				<li class="nav-item"><a class="nav-link"
-				href="iniciarSesion.jsp"><span class="colorVinoClaro">Iniciar Sesion</span></a></li>
-				<li class="nav-item"><a class="nav-link"
-				href="crearCuenta.jsp"><span class="colorVinoClaro">Crear Cuenta</span></a></li>
+				href="iniciarSesion.jsp"><span class="colorVinoClaro">Iniciar
+						Sesion</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="crearCuenta.jsp"><span
+					class="colorVinoClaro">Crear Cuenta</span></a></li>
+			<% String admin = ""+session.getAttribute("tipocuenta");
+			if (admin.equals("1")){%>
+			<li class="nav-item"><a class="nav-link" href="admin.jsp"><span
+					class="colorVinoClaro">Administrar</span></a></li>
+			<%} %>
 		</ul>
 
 		<form class="form-inline my-2 my-lg-0">

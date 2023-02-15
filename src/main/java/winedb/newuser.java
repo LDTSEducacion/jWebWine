@@ -46,7 +46,7 @@ public class newuser extends HttpServlet {
 			//Meto en una variables todos los usuarios
 			beanDB basedatos = new beanDB();
 			String[][] resultadoquery = null;
-			String redirect = "../crearCuenta.jsp";
+			
 
 			//Capturo datos
 			String usuario=request.getParameter("usuario");

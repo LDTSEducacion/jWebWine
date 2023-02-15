@@ -5,7 +5,8 @@
 <html>
 <head>
 <title>ProyectoBodegas</title>
-<link rel="stylesheet" href="css/estilosIndex.css">
+
+<link rel="stylesheet" href="css/estilosIniciarSesion.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -23,6 +24,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
+<script src="scripts/scripts.js"></script>
 </head>
 
 <body>
@@ -64,77 +66,37 @@
 	</div>
 	</nav>
 	<%
-	String resultadobusqueda = null;
-	resultadobusqueda = request.getParameter("resultadobusqueda");
+	String id=request.getParameter("id");
 	String[][] tablares;
-	beanDB basededatos = new beanDB();
-	if (resultadobusqueda == null) {
-		String query = "select imagen,nombre,tipo,origen,descripcion,envejecimiento,idBotella from botellas";
-		tablares = basededatos.resConsultaSelectA3(query);
-	} else {
-		String query = "select imagen,nombre,tipo,origen,descripcion,envejecimiento,idBotella from botellas where nombre=lower('" + resultadobusqueda
-		+ "')";
-		tablares = basededatos.resConsultaSelectA3(query);
+	beanDB basededatos = new beanDB(); 
+	String query = "select nombre from botellas where idBotella="+id;
+	tablares = basededatos.resConsultaSelectA3(query);
+	String nombre=tablares[0][0];
+	
+	if(session.getAttribute("iniciado") == ("1")){%>
+	<h1>Crear Comentario sobre: <%=nombre %></h1>
+	<form action="./Newcomment?id=<%=id%>" method="post" name="nuevocomentario" />
+	<table style="text-align: left; border: none;">
+		<tr>
+			<td><input type="hidden" name="varoculta" value="secreto" />
+				Comentario:</td>
+			<td><input type="text" name="comentario" value="" class="inputgris" /></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td style="text-align: right;"><input type="button" name="send"
+				value="Enviar" onclick="compruebayenviaC();" /></td>
+		</tr>
+	</table>
+	</form>
+		<%}else{
+	%><h1>Tiene que iniciar sesion para poder comentar</h1> 
+	<hr>
+	<a href="index.jsp">Inicio</a><br>
+	<a href="iniciarSesion.jsp">Iniciar Sesion</a>
+	
+	<%
 	}
-	if ((resultadobusqueda == null && tablares != null) || (resultadobusqueda != null && tablares != null)) {
 	%>
-	<div id="titulo">
-		<h2>Informacion sobre cualquier tipo de botella</h2>
-	</div>
-	<div id="principal" class="container-fluid">
-		<div class="row">
-			<div class="col-12 ">
-
-
-				<table>
-					<%
-					for (int i = 0; i < tablares.length; i++) {
-					%><tr>
-						<%
-						for (int j = 0; j < tablares[i].length - 5; j++) {
-						%>
-						<td>
-							<%
-							if (j == 0) {
-							%><img alt="<%=tablares[i][j]%>" src="<%=tablares[i][j]%>">
-							<%
-							} else if (j == 1) {
-							%><h3>
-								<b>Nombre: </b><%=tablares[i][j]%></h3>
-							<p>
-								<b>Tipo: </b><%=tablares[i][j + 1]%>
-								<br> <b>Origen: </b><%=tablares[i][j + 2]%>
-								<br> <b>Envejecimiento: </b><%=tablares[i][j +4]%></p>
-							<p>
-								<b>Descripcion: </b><br><%=tablares[i][j + 3]%></p> 
-								<a href="informacionBotellas.jsp?id=<%=tablares[i][j+5] %>" > Ver Informacion</a>
-						</td>
-						<%
-						}
-						}
-						%>
-					
-					<tr />
-					<%}%>
-				</table>
-				<%
-				} else {
-				%>
-				<h1>No hay resultados de busqueda</h1>
-				<a href="index.jsp">Volver</a>
-				<%
-				}
-				%>
-			</div>
-
-
-
-		</div>
-	</div>
-
-
-
-
-
-</body>
+	</body>
 </html>
