@@ -15,7 +15,7 @@ public class beanDB {
 		{
 	        try{
 	        	Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-	        	cn=DriverManager.getConnection("jdbc:mysql://34.193.109.121/ProyectoBodegas?useSSL=false","ProyectoWebAlcerreca139","Al%$c3RR?3C4%&");
+	        	cn=DriverManager.getConnection("jdbc:mysql://34.193.109.121/ProyectoBodegas?useSSL=false","usuario","contraseña");
 	        }catch (SQLException e){
 	            System.out.println("Excepcion, en metodo ConectarBD(apertura DSN): " + e.getMessage());
 	        }
